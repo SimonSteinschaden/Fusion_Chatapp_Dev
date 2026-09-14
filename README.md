@@ -100,16 +100,25 @@ Neukompilieren änderbar:
 <add key="ApiBaseUrl" value="http://127.0.0.1:5214/"/>
 ```
 
-Bauen und starten:
+Am einfachsten: Solution `Client/WPF_Fusion.sln` in Visual Studio öffnen — sie enthält
+Client **und** Server, und Visual Studio stellt die NuGet-Pakete selbst wieder her.
+
+Auf der Kommandozeile sind es zwei Schritte. Der Client nutzt noch das alte
+`packages.config`-Format, das `msbuild /t:Restore` **nicht** bedient — dafür braucht es
+[`nuget.exe`](https://dist.nuget.org/win-x86-commandline/latest/nuget.exe):
 
 ```powershell
+nuget restore Client\WPF_Fusion.sln
+
 & "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" `
-    Client\WPF_Fusion.csproj /t:Restore,Build
+    Client\WPF_Fusion.csproj /t:Build
+
 .\Client\bin\Debug\WPF_Fusion.exe
 ```
 
-Oder die Solution `Client/WPF_Fusion.sln` in Visual Studio öffnen — sie enthält
-Client **und** Server.
+> Das Projekt sollte in einem Pfad ohne extreme Verschachtelung liegen. Einzelne
+> NuGet-Dateien überschreiten sonst die Windows-Pfadgrenze von 260 Zeichen und die
+> Wiederherstellung schlägt mit „Ein Teil des Pfades … konnte nicht gefunden werden" fehl.
 
 ### 5. Ausprobieren
 

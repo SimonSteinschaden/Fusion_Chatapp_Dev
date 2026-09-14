@@ -121,7 +121,8 @@ anlegen → senden → Empfänger sieht sie.
       `PasswordHasher`, Teilnehmerprüfung, `GetOrCreateDirect`-Idempotenz,
       Paginierungsrichtung, `afterUtc`-Grenzfälle.  → D4
 - [ ] **5.3** Client auf `net8.0-windows` und SDK-Projektformat migrieren;
-      `packages.config` durch `PackageReference` ersetzen.  → D3
+      `packages.config` durch `PackageReference` ersetzen. Erspart den separaten
+      `nuget restore`-Schritt und macht den Client mit `dotnet build` baubar.  → D3
 - [ ] **5.4** GitHub-Action: Server bauen + Tests, Client bauen (windows-latest).  → D4
 - [ ] **5.5** Strukturiertes Logging (Serilog) mit Korrelations-IDs.
 - [ ] **5.6** Fehlende Chat-Funktionen: Nachrichten bearbeiten/löschen, Gelesen-Status,
