@@ -1,0 +1,153 @@
+﻿<Window x:Class="WPF_Fusion.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:WPF_Fusion.MVVM.ViewModel"
+        xmlns:local="clr-namespace:WPF_Fusion"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Height="600"
+        Width="920"
+        AllowsTransparency= "True"
+        WindowStartupLocation= "CenterScreen"
+        WindowStyle= "None"
+        ResizeMode="CanResizeWithGrip"
+        Background="Transparent">
+
+    <!--<Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>-->
+
+    <!--//Window Border //-->
+    <Border x:Name="RootBorder"
+            Grid.ColumnSpan="3"
+            CornerRadius="10"
+            MouseDown="Border_MouseDown"
+            SnapsToDevicePixels="True">
+
+        <Grid>
+            <!-- Background layer -->
+            <MediaElement x:Name="LoungeVideo"
+                      Source="Assets/lounge.mp4"
+                      LoadedBehavior="Manual"
+                      UnloadedBehavior="Manual"
+                      Stretch="UniformToFill"
+                      IsMuted="True"
+                      Volume="0"
+                      Panel.ZIndex="0"
+                      MediaEnded="LoungeVideo_MediaEnded"/>
+
+            <!-- Optional dark overlay for readability -->
+            <!--<Rectangle Fill="#AA212529" Panel.ZIndex="1"/>-->
+
+            <!-- UI layer -->
+            <Grid Panel.ZIndex="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <!-- Window buttons -->
+                <StackPanel Grid.Row="0" Grid.Column="2"
+                        HorizontalAlignment="Left"
+                        Orientation="Horizontal" Margin="10,0,0,0">
+                    <Button Width="30" Height="30"
+                        Content="➖"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Foreground="#FF6262FF"
+                        FontWeight="Bold"
+                        Click="ButtonMinimize_Click"/>
+
+                    <Button Width="20" Height="19"
+                        Content="△"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Foreground="Yellow"
+                        FontWeight="Bold"
+                        RenderTransformOrigin="-0.122,-0.63"
+                        Click="ButtonMaximize_Click">
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="181.124"/>
+                                <TranslateTransform X="24.436" Y="45.439"/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                    </Button>
+
+                    <Button Width="30" Height="30"
+                        Content="🞮"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Foreground="Red"
+                        FontWeight="Bold"
+                        Click="ButtonClose_Click"/>
+                </StackPanel>
+
+                <!-- Title -->
+                <StackPanel Grid.Row="1" Grid.Column="0">
+                    <TextBlock Text="Fusion"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Foreground="White"
+                           FontSize="30"
+                           Margin="30,10,0,0"/>
+                </StackPanel>
+
+                <!-- Menu -->
+                <StackPanel Grid.Row="2" Grid.Column="0">
+                    <RadioButton Content="Home"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             IsChecked="True"
+                             Command="{Binding HomeViewCommand}"/>
+
+                    <RadioButton Content="Chats"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"
+                             IsChecked="False"
+                             Command="{Binding ChatViewCommand}"/>
+
+                    <Button Content="Sign out"
+                            Height="34"
+                            Margin="20,24,20,0"
+                            Background="#33FFFFFF"
+                            Foreground="White"
+                            BorderThickness="0"
+                            Style="{StaticResource RoundedButtonStyle}"
+                            Command="{Binding LogoutCommand}"/>
+                </StackPanel>
+
+                <Label Grid.Row="1" 
+                       Grid.Column="1"
+                       Content="{Binding GreetingUsername}"
+                       Foreground="White"
+                       FontSize="22"/> 
+                <!-- Search box removed: it had no binding and no behaviour.
+                     See TODO.md 3.12 / 5.6 for the planned user search. -->
+
+
+                <!-- Content -->
+                <ContentControl Grid.Row="2"
+                            Grid.Column="1"
+                            Margin="10,10,10,10"
+                            Content="{Binding CurrentView}"/>
+            </Grid>
+        </Grid>
+    </Border>
+
+</Window>

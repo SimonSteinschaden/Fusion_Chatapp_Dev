@@ -1,0 +1,129 @@
+﻿<Application x:Class="WPF_Fusion.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WPF_Fusion"
+             xmlns:viewModel="clr-namespace:WPF_Fusion.MVVM.ViewModel"
+             xmlns:view="clr-namespace:WPF_Fusion.MVVM.View"
+             xmlns:infra="clr-namespace:WPF_Fusion.Infrastructure"
+             ShutdownMode="OnExplicitShutdown">
+
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="./Theme/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="./Theme/ChatItem.xaml"/>
+                <ResourceDictionary Source="./Theme/MessageBox.xaml"/>
+                <ResourceDictionary Source="./Theme/ContactCard.xaml"/>
+                <ResourceDictionary Source="./Theme/TextboxTheme.xaml"/>
+                <ResourceDictionary Source="./Theme/StylishScrollBar.xaml"/>
+                <ResourceDictionary Source="./Theme/AddUserTextBox.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Placeholder Style -->
+            <Style TargetType="TextBox">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TextBox">
+                            <Grid>
+                                <ScrollViewer x:Name="PART_ContentHost"/>
+
+                                <TextBlock x:Name="Placeholder"
+                                           Text="{TemplateBinding Tag}"
+                                           Foreground="Gray"
+                                           Margin="5,0,0,0"
+                                           VerticalAlignment="Center"
+                                           IsHitTestVisible="False"
+                                           Visibility="Collapsed"/>
+                            </Grid>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="Text" Value="">
+                                    <Setter TargetName="Placeholder" Property="Visibility" Value="Visible"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!-- Link Style -->
+            <Style x:Key="LinkButtonStyle" TargetType="Button">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Foreground" Value="Black"/>
+                <Setter Property="Cursor" Value="Hand"/>
+            </Style>
+
+            <!-- Rounded Button Style -->
+            <Style x:Key="RoundedButtonStyle" TargetType="Button">
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="2">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+                <view:HomeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ChatViewModel}">
+                <view:ChatView/>
+            </DataTemplate>
+            
+            <BooleanToVisibilityConverter x:Key="BoolToVisibility"/>
+            <SolidColorBrush x:Key="UnderlineBrush" Color="#DDFFFFFF"/>
+            <SolidColorBrush x:Key="InputForegroundBrush" Color="#FFFFFFFF"/>
+            
+            <Style x:Key="UnderlineTextBoxStyle" TargetType="TextBox">
+                <Setter Property="Foreground" Value="{StaticResource InputForegroundBrush}"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                <Setter Property="BorderBrush" Value="{StaticResource UnderlineBrush}"/>
+                <Setter Property="CaretBrush" Value="{StaticResource InputForegroundBrush}"/>
+                <Setter Property="Height" Value="34"/>
+                <Setter Property="Padding" Value="2,4,2,6"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TextBox">
+                            <Grid>
+                                <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"/>
+                                <ScrollViewer x:Name="PART_ContentHost"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="UnderlinePasswordBoxStyle" TargetType="PasswordBox">
+                <Setter Property="Foreground" Value="{StaticResource InputForegroundBrush}"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                <Setter Property="BorderBrush" Value="{StaticResource UnderlineBrush}"/>
+                <Setter Property="CaretBrush" Value="{StaticResource InputForegroundBrush}"/>
+                <Setter Property="Height" Value="34"/>
+                <Setter Property="Padding" Value="2,4,2,6"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="PasswordBox">
+                            <Grid>
+                                <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"/>
+                                <ScrollViewer x:Name="PART_ContentHost"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

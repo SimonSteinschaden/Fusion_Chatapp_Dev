@@ -1,0 +1,19 @@
+# Normalise line endings so Windows and CI checkouts agree.
+* text=auto
+
+*.cs      text diff=csharp
+*.xaml    text
+*.csproj  text
+*.sln     text eol=crlf
+*.config  text
+*.json    text
+*.md      text
+*.yml     text
+
+# Binary assets - never normalise
+*.png  binary
+*.jpg  binary
+*.mp4  binary
+*.pdf  binary
+*.docx binary
+*.zip  binary

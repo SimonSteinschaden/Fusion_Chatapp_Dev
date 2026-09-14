@@ -1,0 +1,50 @@
+## Build output
+[Bb]in/
+[Oo]bj/
+out/
+[Dd]ebug/
+[Rr]elease/
+*.dll
+*.exe
+*.pdb
+
+## NuGet (packages.config style restore)
+packages/
+*.nupkg
+!packages.config
+
+## Visual Studio / Rider / VS Code
+.vs/
+.idea/
+*.user
+*.suo
+*.userprefs
+*.sln.docstates
+*_wpftmp.csproj
+
+## Local configuration and secrets - never commit these
+appsettings.Local.json
+appsettings.*.local.json
+appsettings-*.json
+!appsettings.Development.json
+*.pfx
+.env
+.env.*
+
+## Chat data written at runtime by JsonChatStore
+Server/Data/conversations.json
+Server/Data/messages.json
+
+## Archived copies and backups (kept on disk, not in version control)
+*.zip
+Fusion_lokal_*/
+Fusion_Sicherheitskopie_*/
+
+## Database dumps - contain real user records (email addresses, password hashes)
+## and must never be published. The schema is defined by Server/Migrations/.
+*.sql
+
+## OS noise
+Thumbs.db
+desktop.ini
+.DS_Store
