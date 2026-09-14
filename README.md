@@ -41,6 +41,20 @@ persistentem Volume an. Bereitschaft prüfen:
 docker compose ps
 ```
 
+> **Warum kein fertiges Datenbank-Backup im Repository liegt:** Versioniert wird nur
+> das *Rezept* zum Erzeugen einer leeren, korrekten Datenbank —
+> `docker-compose.yml` (legt Container und Volume an) und
+> `Server/Migrations/` (definiert das Schema als Code). Das Docker-Volume selbst
+> enthält binäre Postgres-Dateien und ist maschinenspezifisch; es gehört grundsätzlich
+> nicht in Git. Ein SQL-Dump mit echten Testdaten (`chatserverSae.sql`) existiert lokal,
+> ist aber bewusst über `.gitignore` ausgeschlossen, weil er reale E-Mail-Adressen und
+> Passwort-Hashes enthält — er darf nicht veröffentlicht werden.
+>
+> Auf jedem neuen Rechner/Server entsteht die Datenbank dadurch immer frisch und leer:
+> `docker compose up -d` erzeugt ein neues Volume, `dotnet run` wendet beim Start
+> automatisch alle ausstehenden Migrationen an (siehe Schritt 3) — kein manueller
+> Import nötig.
+
 ### 2. Zugangsdaten hinterlegen
 
 Verbindungszeichenfolge und JWT-Signaturschlüssel stehen **nicht** im Repository.

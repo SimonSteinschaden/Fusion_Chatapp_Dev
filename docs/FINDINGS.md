@@ -97,6 +97,19 @@ ZIP-Archiven und sind über `.gitignore` von der Versionierung ausgeschlossen.
 > **Noch offen, außerhalb des Codes:** Das Passwort des PostgreSQL-Kontos auf
 > `srv1266377.hstgr.cloud` muss am Server selbst geändert werden.
 
+### S2b ✅ SQL-Dump mit echten Nutzerdaten im Projektverzeichnis
+*Beim Vorbereiten des ersten Commits gefunden, nicht Teil der ursprünglichen Erhebung.*
+`chatserverSae.sql` im Projektwurzelverzeichnis ist ein vollständiger Datenbank-Dump
+mit acht realen Benutzerdatensätzen — echte E-Mail-Adressen (u. a. private
+Gmail-Adresse des Autors, Adressen von Mitstudierenden) plus zugehörige
+PBKDF2-Passwort-Hashes. Wäre der Dump mitversioniert worden, hätten diese Daten mit
+dem ersten Push dauerhaft öffentlich in der Git-Historie gestanden.
+
+**Behoben:** `*.sql` in `.gitignore` aufgenommen, Datei aus dem Staging entfernt
+(`git rm --cached`), Begründung im README dokumentiert. Das Schema, das der Dump
+transportiert, steht vollständig und ohne Nutzerdaten in `Server/Migrations/` — ein
+Dump zum Wiederherstellen des Schemas ist nicht nötig.
+
 ### S3 🟡 Unverschlüsselter Transport
 Client und Server kommunizieren über HTTP. E-Mail, Passwort und JWT gehen im Klartext
 über das Netz. `UseHttpsRedirection()` war zudem nur im Development-Environment aktiv —
